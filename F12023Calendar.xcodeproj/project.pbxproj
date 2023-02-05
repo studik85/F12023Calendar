@@ -12,6 +12,7 @@
 		AC237DDC298FFBBB00334B55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC237DDB298FFBBB00334B55 /* Assets.xcassets */; };
 		AC237DDF298FFBBB00334B55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC237DDE298FFBBB00334B55 /* Preview Assets.xcassets */; };
 		AC237DE9298FFED700334B55 /* ScheduleOfRacesForASeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DE8298FFED700334B55 /* ScheduleOfRacesForASeason.swift */; };
+		AC237DEC299001B800334B55 /* EventsDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DEB299001B800334B55 /* EventsDataServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		AC237DDB298FFBBB00334B55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC237DDE298FFBBB00334B55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AC237DE8298FFED700334B55 /* ScheduleOfRacesForASeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleOfRacesForASeason.swift; sourceTree = "<group>"; };
+		AC237DEB299001B800334B55 /* EventsDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		AC237DD6298FFBB900334B55 /* F12023Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				AC237DEA2990006800334B55 /* DataServices */,
 				AC237DE7298FFE1C00334B55 /* ViewModels */,
 				AC237DE6298FFE1200334B55 /* Views */,
 				AC237DE5298FFE0800334B55 /* Model */,
@@ -92,6 +95,14 @@
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AC237DEA2990006800334B55 /* DataServices */ = {
+			isa = PBXGroup;
+			children = (
+				AC237DEB299001B800334B55 /* EventsDataServices.swift */,
+			);
+			path = DataServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +177,7 @@
 			files = (
 				AC237DDA298FFBB900334B55 /* ContentView.swift in Sources */,
 				AC237DD8298FFBB900334B55 /* F12023CalendarApp.swift in Sources */,
+				AC237DEC299001B800334B55 /* EventsDataServices.swift in Sources */,
 				AC237DE9298FFED700334B55 /* ScheduleOfRacesForASeason.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
