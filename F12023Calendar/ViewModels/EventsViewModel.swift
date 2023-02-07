@@ -10,6 +10,7 @@ import Foundation
 class EventViewModel: ObservableObject {
     
     @Published var scheduleOfRaces: ScheduleOfRaces?
+    @Published var allEvents: [Race] = []
     
     init() {
         getScheduleOfRaces()
@@ -19,36 +20,35 @@ class EventViewModel: ObservableObject {
         
         guard let url = URL(string: "https://ergast.com/api/f1/2023.json") else {return}
         
+        downloadData(fromURL: url) { (returnedData) in
+            if let data = returnedData {
+                guard let racesSchedule = try? JSONDecoder().decode(ScheduleOfRaces.self, from: data) else {return}
+                DispatchQueue.main.async { [weak self] in
+                    self?.scheduleOfRaces = racesSchedule
+                    self?.allEvents = racesSchedule.mrData.raceTable.races
+                }
+                
+            } else {
+                print("No data returned.")
+            }
+        }
+
+    }
+    
+    func downloadData(fromURL url: URL, complitionHandler: @escaping (_ data: Data?) -> Void) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
-                print("No Data")
+            guard
+                let data = data,
+                error == nil,
+                let response = response as? HTTPURLResponse,
+                response.statusCode >= 200 && response.statusCode < 300 else {
+                print("Error Downloading Data.")
+                complitionHandler(nil)
                 return
             }
+            complitionHandler(data)
+
             
-            guard error == nil else {
-                print("Error: \(String(describing: error))")
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse else {
-                print("Invalid response.")
-                return
-            }
-            
-            guard response.statusCode >= 200 && response.statusCode < 300 else {
-                print("Status code should be 2xx, but is \(response.statusCode)")
-                return
-            }
-            
-            print("Successfully dowmloaded data!")
-            print(data)
-            let jsonString = String(data: data, encoding: .utf8)
-            print(jsonString)
-            
-            guard let racesSchedule = try? JSONDecoder().decode(ScheduleOfRaces.self, from: data) else {return}
-            DispatchQueue.main.async { [weak self] in
-                self?.scheduleOfRaces = racesSchedule
-            }
             
         }
         .resume()
