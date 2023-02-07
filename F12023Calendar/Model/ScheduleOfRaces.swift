@@ -7,10 +7,10 @@
 
 import Foundation
 
-// MARK: - ScheduleOfRacesForASeason
-struct ScheduleOfRacesForASeason: Codable {
+// MARK: - ScheduleOfRaces
+struct ScheduleOfRaces: Codable {
+    
     let mrData: MRData
-
     enum CodingKeys: String, CodingKey {
         case mrData = "MRData"
     }
@@ -18,25 +18,18 @@ struct ScheduleOfRacesForASeason: Codable {
 
 // MARK: - MRData
 struct MRData: Codable {
-    let xmlns: String
-    let series: String
-    let url: String
-    let limit, offset, total: String
+    
     let raceTable: RaceTable
-
     enum CodingKeys: String, CodingKey {
-        case xmlns, series, url, limit, offset, total
         case raceTable = "RaceTable"
     }
 }
 
 // MARK: - RaceTable
 struct RaceTable: Codable {
-    let season: String
+    
     let races: [Race]
-
     enum CodingKeys: String, CodingKey {
-        case season
         case races = "Races"
     }
 }
@@ -82,7 +75,9 @@ struct Circuit: Codable {
 
 // MARK: - Location
 struct Location: Codable {
-    let lat, long, locality, country: String
+    let lat, long: String
+    let locality, country: String
+    
 }
 
 // MARK: - FirstPractice

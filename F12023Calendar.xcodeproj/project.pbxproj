@@ -8,21 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		AC237DD8298FFBB900334B55 /* F12023CalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DD7298FFBB900334B55 /* F12023CalendarApp.swift */; };
-		AC237DDA298FFBB900334B55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DD9298FFBB900334B55 /* ContentView.swift */; };
 		AC237DDC298FFBBB00334B55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC237DDB298FFBBB00334B55 /* Assets.xcassets */; };
 		AC237DDF298FFBBB00334B55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC237DDE298FFBBB00334B55 /* Preview Assets.xcassets */; };
-		AC237DE9298FFED700334B55 /* ScheduleOfRacesForASeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DE8298FFED700334B55 /* ScheduleOfRacesForASeason.swift */; };
-		AC237DEC299001B800334B55 /* EventsDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DEB299001B800334B55 /* EventsDataServices.swift */; };
+		AC237DE9298FFED700334B55 /* ScheduleOfRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DE8298FFED700334B55 /* ScheduleOfRaces.swift */; };
+		AC237DEC299001B800334B55 /* EventsViewModelWithCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DEB299001B800334B55 /* EventsViewModelWithCombine.swift */; };
+		AC237DEE2990030400334B55 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DED2990030400334B55 /* EventsView.swift */; };
+		ACB6BE5A299262D900DB6655 /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6BE59299262D900DB6655 /* EventsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AC237DD4298FFBB900334B55 /* F12023Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = F12023Calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC237DD7298FFBB900334B55 /* F12023CalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F12023CalendarApp.swift; sourceTree = "<group>"; };
-		AC237DD9298FFBB900334B55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AC237DDB298FFBBB00334B55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC237DDE298FFBBB00334B55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AC237DE8298FFED700334B55 /* ScheduleOfRacesForASeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleOfRacesForASeason.swift; sourceTree = "<group>"; };
-		AC237DEB299001B800334B55 /* EventsDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataServices.swift; sourceTree = "<group>"; };
+		AC237DE8298FFED700334B55 /* ScheduleOfRaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleOfRaces.swift; sourceTree = "<group>"; };
+		AC237DEB299001B800334B55 /* EventsViewModelWithCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelWithCombine.swift; sourceTree = "<group>"; };
+		AC237DED2990030400334B55 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		ACB6BE59299262D900DB6655 /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,12 +57,10 @@
 		AC237DD6298FFBB900334B55 /* F12023Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				AC237DEA2990006800334B55 /* DataServices */,
+				AC237DE5298FFE0800334B55 /* Model */,
 				AC237DE7298FFE1C00334B55 /* ViewModels */,
 				AC237DE6298FFE1200334B55 /* Views */,
-				AC237DE5298FFE0800334B55 /* Model */,
 				AC237DD7298FFBB900334B55 /* F12023CalendarApp.swift */,
-				AC237DD9298FFBB900334B55 /* ContentView.swift */,
 				AC237DDB298FFBBB00334B55 /* Assets.xcassets */,
 				AC237DDD298FFBBB00334B55 /* Preview Content */,
 			);
@@ -78,7 +78,7 @@
 		AC237DE5298FFE0800334B55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AC237DE8298FFED700334B55 /* ScheduleOfRacesForASeason.swift */,
+				AC237DE8298FFED700334B55 /* ScheduleOfRaces.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -86,6 +86,7 @@
 		AC237DE6298FFE1200334B55 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AC237DED2990030400334B55 /* EventsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -93,16 +94,10 @@
 		AC237DE7298FFE1C00334B55 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				AC237DEB299001B800334B55 /* EventsViewModelWithCombine.swift */,
+				ACB6BE59299262D900DB6655 /* EventsViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		AC237DEA2990006800334B55 /* DataServices */ = {
-			isa = PBXGroup;
-			children = (
-				AC237DEB299001B800334B55 /* EventsDataServices.swift */,
-			);
-			path = DataServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +170,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC237DDA298FFBB900334B55 /* ContentView.swift in Sources */,
+				ACB6BE5A299262D900DB6655 /* EventsViewModel.swift in Sources */,
+				AC237DEE2990030400334B55 /* EventsView.swift in Sources */,
 				AC237DD8298FFBB900334B55 /* F12023CalendarApp.swift in Sources */,
-				AC237DEC299001B800334B55 /* EventsDataServices.swift in Sources */,
-				AC237DE9298FFED700334B55 /* ScheduleOfRacesForASeason.swift in Sources */,
+				AC237DEC299001B800334B55 /* EventsViewModelWithCombine.swift in Sources */,
+				AC237DE9298FFED700334B55 /* ScheduleOfRaces.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

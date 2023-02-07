@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct F12023CalendarApp: App {
+    
+    @StateObject private var vm = EventViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EventsView()
+                .environmentObject(vm)
         }
     }
 }

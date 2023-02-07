@@ -6,16 +6,24 @@
 //
 
 import Foundation
-
 import Combine
+import SwiftUI
+import MapKit
 
-class EventsDataServices: ObservableObject {
+class EventsViewModelWithCombine: ObservableObject {
     
-    @Published var raceEvents : ScheduleOfRacesForASeason?
+    
+    @Published var raceEvents : ScheduleOfRaces?
+    @Published var racingWeeknd: [Race] = []
+    @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
+    let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    
     var cancellables = Set<AnyCancellable>()
     
     init() {
         getRacesData()
+        self.racingWeeknd = raceEvents?.mrData.raceTable.races ?? []
+        print(racingWeeknd)
     }
     
     func getRacesData() {
@@ -37,10 +45,11 @@ class EventsDataServices: ObservableObject {
             //.subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: DispatchQueue.main)
             .tryMap(handleOutput)
-            .decode(type: ScheduleOfRacesForASeason.self, decoder: JSONDecoder())
+            .decode(type: ScheduleOfRaces.self, decoder: JSONDecoder())
             .sink { (complition) in
             } receiveValue: {[weak self](returnedEvents) in
                 self?.raceEvents = returnedEvents
+                self?.racingWeeknd = returnedEvents.mrData.raceTable.races
             }
             .store(in: &cancellables)
         
@@ -54,5 +63,6 @@ class EventsDataServices: ObservableObject {
         }
         
     }
+    
     
 }
