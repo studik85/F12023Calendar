@@ -6,14 +6,20 @@
 //  Download JSON from API in Swift w/ URLSession and escaping closures
 
 import Foundation
+import SwiftUI
+import MapKit
 
 class EventViewModel: ObservableObject {
     
     @Published var scheduleOfRaces: ScheduleOfRaces?
     @Published var allEvents: [Race] = []
+    @Published var eventLocation: Location?
+    @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
+    let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
     
     init() {
         getScheduleOfRaces()
+       
     }
     
     func getScheduleOfRaces() {
@@ -26,6 +32,8 @@ class EventViewModel: ObservableObject {
                 DispatchQueue.main.async { [weak self] in
                     self?.scheduleOfRaces = racesSchedule
                     self?.allEvents = racesSchedule.mrData.raceTable.races
+                    self?.eventLocation = racesSchedule.mrData.raceTable.races.first!.circuit.location
+                    self?.updateMapRegion(location: racesSchedule.mrData.raceTable.races.first!.circuit.location)
                 }
                 
             } else {
@@ -52,5 +60,11 @@ class EventViewModel: ObservableObject {
             
         }
         .resume()
+    }
+    
+    private func updateMapRegion (location: Location) {
+        withAnimation(.easeInOut) {
+            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(eventLocation?.lat ?? "") ?? 0.0000, longitude: Double(eventLocation?.long ?? "") ?? 0.0000), span: mapSpan)
+        }
     }
 }

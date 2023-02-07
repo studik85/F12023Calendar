@@ -12,10 +12,12 @@ import MapKit
 struct EventsView: View {
     
     @EnvironmentObject private var vm: EventViewModel
+//    @State var mapRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 26.0325, longitude: 50.5106), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     
     var body: some View {
-        VStack {
-            Text(vm.scheduleOfRaces?.mrData.raceTable.races.first?.raceName ?? "")
+        ZStack{
+            Map(coordinateRegion: $vm.mapRegion)
+                .ignoresSafeArea()
         }
     }
 }
