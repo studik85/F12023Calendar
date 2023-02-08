@@ -54,7 +54,7 @@ extension EventsView {
         
         VStack {
             Button (action: vm.toggleEventsList) {
-                Text("\(vm.eventLocation?.circuit.location.country ?? "") \(vm.eventLocation?.circuit.location.locality ?? "")" )
+                Text("\(vm.eventLocation?.circuit.location.country ?? ""), \(vm.eventLocation?.circuit.location.locality ?? "")" )
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
