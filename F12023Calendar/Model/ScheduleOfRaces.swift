@@ -35,7 +35,9 @@ struct RaceTable: Codable {
 }
 
 // MARK: - Race
-struct Race: Codable, Identifiable {
+struct Race: Codable, Identifiable, Equatable {
+    
+    
     let id = UUID().uuidString
     let season, round: String
     let url: String
@@ -56,6 +58,10 @@ struct Race: Codable, Identifiable {
         case thirdPractice = "ThirdPractice"
         case qualifying = "Qualifying"
         case sprint = "Sprint"
+    }
+    
+    static func == (lhs: Race, rhs: Race) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

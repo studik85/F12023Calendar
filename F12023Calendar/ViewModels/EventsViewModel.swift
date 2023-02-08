@@ -13,9 +13,18 @@ class EventViewModel: ObservableObject {
     
     @Published var scheduleOfRaces: ScheduleOfRaces?
     @Published var allEvents: [Race] = []
-    @Published var eventLocation: Location?
+    @Published var eventLocation: Location? {
+        didSet {
+            updateMapRegion(location: eventLocation!)
+        }
+    }
+    
+    // Текущий регион на карте
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
     let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    
+    // Показать список гонок
+    @Published var showEventList: Bool = false
     
     init() {
         getScheduleOfRaces()
@@ -67,4 +76,18 @@ class EventViewModel: ObservableObject {
             mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(eventLocation?.lat ?? "") ?? 0.0000, longitude: Double(eventLocation?.long ?? "") ?? 0.0000), span: mapSpan)
         }
     }
+    
+    func toggleEventsList() {
+        withAnimation(.easeInOut) {
+            showEventList.toggle()
+        }
+    }
+    
+    func showNextEvent(location: Location) {
+        withAnimation(.easeInOut) {
+    eventLocation = location
+            showEventList = false
+        }
+    }
+    
 }

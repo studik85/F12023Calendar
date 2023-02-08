@@ -14,6 +14,7 @@
 		AC237DEC299001B800334B55 /* EventsViewModelWithCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DEB299001B800334B55 /* EventsViewModelWithCombine.swift */; };
 		AC237DEE2990030400334B55 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC237DED2990030400334B55 /* EventsView.swift */; };
 		ACB6BE5A299262D900DB6655 /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6BE59299262D900DB6655 /* EventsViewModel.swift */; };
+		ACCAD2A329938F8100345399 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A229938F8100345399 /* EventsListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		AC237DEB299001B800334B55 /* EventsViewModelWithCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelWithCombine.swift; sourceTree = "<group>"; };
 		AC237DED2990030400334B55 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		ACB6BE59299262D900DB6655 /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
+		ACCAD2A229938F8100345399 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				AC237DED2990030400334B55 /* EventsView.swift */,
+				ACCAD2A229938F8100345399 /* EventsListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACB6BE5A299262D900DB6655 /* EventsViewModel.swift in Sources */,
+				ACCAD2A329938F8100345399 /* EventsListView.swift in Sources */,
 				AC237DEE2990030400334B55 /* EventsView.swift in Sources */,
 				AC237DD8298FFBB900334B55 /* F12023CalendarApp.swift in Sources */,
 				AC237DEC299001B800334B55 /* EventsViewModelWithCombine.swift in Sources */,
