@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventPreviewView: View {
     
-//    @EnvironmentObject var vm: EventViewModel
+    @EnvironmentObject var vm: EventViewModel
     
     let event: Race
     
@@ -31,7 +31,7 @@ struct EventPreviewView: View {
         }
         .padding(20)
         .background(
-        RoundedRectangle(cornerRadius: 10)
+         RoundedRectangle(cornerRadius: 10)
             .fill(.ultraThinMaterial)
             .offset(y:65)
         )
@@ -50,16 +50,22 @@ extension EventPreviewView {
     
     private var imageSection: some View {
         ZStack {
+            
             if let imageName = event.circuit.location.locality {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 150, height: 150)
                     .cornerRadius(10)
             }
         }
+        
         .padding(6)
-        .background(Color.white)
+//        .background(Color.white)
+        .background(
+         RoundedRectangle(cornerRadius: 10)
+            .fill(.ultraThinMaterial))
+        
         .cornerRadius(10)
     }
     
@@ -87,7 +93,7 @@ extension EventPreviewView {
     
     private var nextButton: some View {
         Button {
-            
+            vm.nextButtonPressed()
         } label: {
             Text("Next")
                 .font(.headline)

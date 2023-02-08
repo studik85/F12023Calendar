@@ -29,6 +29,7 @@ struct EventsView: View {
                             EventPreviewView(event: event)
                                 .shadow(color: Color.black.opacity(0.3), radius: 20)
                                 .padding()
+                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         }
                         
                     }

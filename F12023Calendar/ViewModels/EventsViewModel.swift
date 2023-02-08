@@ -95,4 +95,21 @@ class EventViewModel: ObservableObject {
         }
     }
     
+    func nextButtonPressed() {
+        // get the current index
+        guard let currentIndex = allEvents.firstIndex(where: { $0 == eventLocation }) else {return}
+        
+        let nextIndex = currentIndex + 1
+        guard allEvents.indices.contains(nextIndex) else {
+            guard let firstLocation = allEvents.first else {return}
+            showNextEvent(raceLocation: firstLocation)
+            return
+            
+        }
+        
+        // Next
+        let nextEvent = allEvents[nextIndex]
+        showNextEvent(raceLocation: nextEvent)
+    }
+    
 }
