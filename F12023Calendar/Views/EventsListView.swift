@@ -15,7 +15,7 @@ struct EventsListView: View {
         List {
             ForEach(vm.allEvents) { event in
                 Button {
-                    vm.showNextEvent(location: event.circuit.location)
+                    vm.showNextEvent(raceLocation: event)
                 } label: {
                     listRowView(event: event)
                 }

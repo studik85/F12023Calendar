@@ -22,6 +22,17 @@ struct EventsView: View {
                 header
                     .padding()
                 Spacer()
+                
+                ZStack{
+                    ForEach(vm.allEvents) { event in
+                        if vm.eventLocation == event {
+                            EventPreviewView(event: event)
+                                .shadow(color: Color.black.opacity(0.3), radius: 20)
+                                .padding()
+                        }
+                        
+                    }
+                }
             }
         }
     }
@@ -42,13 +53,12 @@ extension EventsView {
         
         VStack {
             Button (action: vm.toggleEventsList) {
-                Text(vm.eventLocation?.country ?? "")
+                Text("\(vm.eventLocation?.circuit.location.country ?? "") \(vm.eventLocation?.circuit.location.locality ?? "")" )
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
-//                    .animation(.none, value: vm.eventLocation!)
                     .overlay(alignment: .leading) {
                         Image(systemName: "arrow.down")
                             .font(.headline)

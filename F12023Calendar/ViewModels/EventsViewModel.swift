@@ -13,7 +13,12 @@ class EventViewModel: ObservableObject {
     
     @Published var scheduleOfRaces: ScheduleOfRaces?
     @Published var allEvents: [Race] = []
-    @Published var eventLocation: Location? {
+//    @Published var eventLocation: Location? {
+//        didSet {
+//            updateMapRegion(location: eventLocation!)
+//        }
+//    }
+    @Published var eventLocation: Race? {
         didSet {
             updateMapRegion(location: eventLocation!)
         }
@@ -41,8 +46,8 @@ class EventViewModel: ObservableObject {
                 DispatchQueue.main.async { [weak self] in
                     self?.scheduleOfRaces = racesSchedule
                     self?.allEvents = racesSchedule.mrData.raceTable.races
-                    self?.eventLocation = racesSchedule.mrData.raceTable.races.first!.circuit.location
-                    self?.updateMapRegion(location: racesSchedule.mrData.raceTable.races.first!.circuit.location)
+                    self?.eventLocation = racesSchedule.mrData.raceTable.races.first!
+                    self?.updateMapRegion(location: racesSchedule.mrData.raceTable.races.first!)
                 }
                 
             } else {
@@ -71,9 +76,9 @@ class EventViewModel: ObservableObject {
         .resume()
     }
     
-    private func updateMapRegion (location: Location) {
+    private func updateMapRegion (location: Race) {
         withAnimation(.easeInOut) {
-            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(eventLocation?.lat ?? "") ?? 0.0000, longitude: Double(eventLocation?.long ?? "") ?? 0.0000), span: mapSpan)
+            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Double(eventLocation?.circuit.location.lat ?? "") ?? 0.0000, longitude: Double(eventLocation?.circuit.location.long ?? "") ?? 0.0000), span: mapSpan)
         }
     }
     
@@ -83,9 +88,9 @@ class EventViewModel: ObservableObject {
         }
     }
     
-    func showNextEvent(location: Location) {
+    func showNextEvent(raceLocation: Race) {
         withAnimation(.easeInOut) {
-    eventLocation = location
+    eventLocation = raceLocation
             showEventList = false
         }
     }
