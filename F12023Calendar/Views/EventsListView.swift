@@ -21,9 +21,9 @@ struct EventsListView: View {
                 }
                 .padding(.vertical, 4)
                 .listRowBackground(Color.clear)
-
                 
-                    
+                
+                
             }
         }
         .listStyle(PlainListStyle())
@@ -42,17 +42,19 @@ extension EventsListView {
     
     private func listRowView(event: Race) -> some View {
         HStack {
-//            Image(systemName: "flag.checkered.2.crossed")
             Image(event.circuit.location.country)
-                                    .resizable()
-                                    .scaledToFit()
+                .resizable()
+                .scaledToFit()
                 .frame(width: 45, height: 45)
                 .cornerRadius(10)
             VStack (alignment: .leading) {
-                Text(event.raceName)
+                Text("ROUND \(event.round)")
                     .font(.headline)
                 Text(event.date)
                     .font(.subheadline)
+                Text(event.raceName.uppercased())
+                    .font(.subheadline)
+                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

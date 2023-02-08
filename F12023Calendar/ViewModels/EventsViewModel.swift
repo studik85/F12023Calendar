@@ -13,11 +13,6 @@ class EventViewModel: ObservableObject {
     
     @Published var scheduleOfRaces: ScheduleOfRaces?
     @Published var allEvents: [Race] = []
-//    @Published var eventLocation: Location? {
-//        didSet {
-//            updateMapRegion(location: eventLocation!)
-//        }
-//    }
     @Published var eventLocation: Race? {
         didSet {
             updateMapRegion(location: eventLocation!)
@@ -33,7 +28,7 @@ class EventViewModel: ObservableObject {
     
     init() {
         getScheduleOfRaces()
-       
+        
     }
     
     func getScheduleOfRaces() {
@@ -54,7 +49,7 @@ class EventViewModel: ObservableObject {
                 print("No data returned.")
             }
         }
-
+        
     }
     
     func downloadData(fromURL url: URL, complitionHandler: @escaping (_ data: Data?) -> Void) {
@@ -69,7 +64,7 @@ class EventViewModel: ObservableObject {
                 return
             }
             complitionHandler(data)
-
+            
             
             
         }
@@ -90,7 +85,7 @@ class EventViewModel: ObservableObject {
     
     func showNextEvent(raceLocation: Race) {
         withAnimation(.easeInOut) {
-    eventLocation = raceLocation
+            eventLocation = raceLocation
             showEventList = false
         }
     }
@@ -100,6 +95,23 @@ class EventViewModel: ObservableObject {
         guard let currentIndex = allEvents.firstIndex(where: { $0 == eventLocation }) else {return}
         
         let nextIndex = currentIndex + 1
+        guard allEvents.indices.contains(nextIndex) else {
+            guard let firstLocation = allEvents.first else {return}
+            showNextEvent(raceLocation: firstLocation)
+            return
+            
+        }
+        
+        // Next
+        let nextEvent = allEvents[nextIndex]
+        showNextEvent(raceLocation: nextEvent)
+    }
+    
+    func prevButtonPressed() {
+        // get the current index
+        guard let currentIndex = allEvents.firstIndex(where: { $0 == eventLocation }) else {return}
+        
+        let nextIndex = currentIndex - 1
         guard allEvents.indices.contains(nextIndex) else {
             guard let firstLocation = allEvents.first else {return}
             showNextEvent(raceLocation: firstLocation)

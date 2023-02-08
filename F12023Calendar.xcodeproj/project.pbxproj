@@ -16,6 +16,7 @@
 		ACB6BE5A299262D900DB6655 /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6BE59299262D900DB6655 /* EventsViewModel.swift */; };
 		ACCAD2A329938F8100345399 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A229938F8100345399 /* EventsListView.swift */; };
 		ACCAD2A52993A7C200345399 /* EventPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A42993A7C200345399 /* EventPreviewView.swift */; };
+		ACCAD2A729940E0C00345399 /* EventMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A629940E0C00345399 /* EventMapAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		ACB6BE59299262D900DB6655 /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		ACCAD2A229938F8100345399 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
 		ACCAD2A42993A7C200345399 /* EventPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreviewView.swift; sourceTree = "<group>"; };
+		ACCAD2A629940E0C00345399 /* EventMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				AC237DED2990030400334B55 /* EventsView.swift */,
 				ACCAD2A229938F8100345399 /* EventsListView.swift */,
 				ACCAD2A42993A7C200345399 /* EventPreviewView.swift */,
+				ACCAD2A629940E0C00345399 /* EventMapAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				AC237DD8298FFBB900334B55 /* F12023CalendarApp.swift in Sources */,
 				AC237DEC299001B800334B55 /* EventsViewModelWithCombine.swift in Sources */,
 				AC237DE9298FFED700334B55 /* ScheduleOfRaces.swift in Sources */,
+				ACCAD2A729940E0C00345399 /* EventMapAnnotationView.swift in Sources */,
 				ACCAD2A52993A7C200345399 /* EventPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

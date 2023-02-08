@@ -15,42 +15,35 @@ struct EventPreviewView: View {
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0) {
-            VStack(alignment: .leading, spacing: 16.0) {
+            VStack(alignment: .leading, spacing: 8) {
                 imageSection
                 titleSection
-
-             
+                
+                
             }
             VStack(spacing: 7){
-               
+                
                 moreAboutButton
                 nextButton
+                prevButton
                 
-
+                
             }
         }
         .padding(20)
         .background(
-         RoundedRectangle(cornerRadius: 10)
-            .fill(.ultraThinMaterial)
-            .offset(y:65)
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.ultraThinMaterial)
+                .offset(y:65)
         )
         .cornerRadius(10)
     }
 }
 
-//struct EventPreviewView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EventPreviewView()
-//            .environmentObject(EventViewModel())
-//    }
-//}
-
 extension EventPreviewView {
     
     private var imageSection: some View {
         ZStack {
-            
             if let imageName = event.circuit.location.locality {
                 Image(imageName)
                     .resizable()
@@ -61,18 +54,18 @@ extension EventPreviewView {
         }
         
         .padding(6)
-//        .background(Color.white)
         .background(
-         RoundedRectangle(cornerRadius: 10)
-            .fill(.ultraThinMaterial))
-        
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.ultraThinMaterial))
         .cornerRadius(10)
     }
     
     private var titleSection: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 1) {
+            Text("ROUND \(event.round)")
+                .fontWeight(.heavy)
             Text(event.raceName)
-                .font(.title2)
+                .font(.subheadline)
                 .fontWeight(.bold)
             Text(event.circuit.circuitName)
                 .font(.subheadline)
@@ -95,7 +88,18 @@ extension EventPreviewView {
         Button {
             vm.nextButtonPressed()
         } label: {
-            Text("Next")
+            Text("Next Race")
+                .font(.headline)
+                .frame(width: 125, height: 30)
+        }
+        .buttonStyle(.bordered)
+    }
+    
+    private var prevButton: some View {
+        Button {
+            vm.prevButtonPressed()
+        } label: {
+            Text("Previous Race")
                 .font(.headline)
                 .frame(width: 125, height: 30)
         }

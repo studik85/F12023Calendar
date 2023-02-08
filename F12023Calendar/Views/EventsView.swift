@@ -16,24 +16,13 @@ struct EventsView: View {
     
     var body: some View {
         ZStack{
-            Map(coordinateRegion: $vm.mapRegion)
-                .ignoresSafeArea()
+           mapLayer
+            .ignoresSafeArea()
             VStack(spacing: 0){
                 header
                     .padding()
                 Spacer()
-                
-                ZStack{
-                    ForEach(vm.allEvents) { event in
-                        if vm.eventLocation == event {
-                            EventPreviewView(event: event)
-                                .shadow(color: Color.black.opacity(0.3), radius: 20)
-                                .padding()
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                        }
-                        
-                    }
-                }
+                eventPreviewStack
             }
         }
     }
@@ -63,20 +52,51 @@ extension EventsView {
                     .overlay(alignment: .leading) {
                         Image(systemName: "arrow.down")
                             .font(.headline)
+                            .fontWeight(.heavy)
                             .foregroundColor(.primary)
                             .padding()
                             .rotationEffect(Angle(degrees: vm.showEventList ? 180 : 0))
                     }
             }
-                
-                
-                if vm.showEventList {
-                    EventsListView()
-                }
+            
+            
+            if vm.showEventList {
+                EventsListView()
+            }
             
         }
         .background(.ultraThinMaterial)
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 15)
+    }
+    
+    private var mapLayer: some View {
+        Map(coordinateRegion: $vm.mapRegion,
+            annotationItems: vm.allEvents,
+            annotationContent: { event in
+            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(event.circuit.location.lat) ?? 0.0000,
+                                                             longitude: Double(event.circuit.location.long) ?? 0.0000)) {
+                EventMapAnnotationView()
+                    .scaleEffect(vm.eventLocation == event ? 1 : 0.7)
+                    .shadow(radius: 10)
+                    .onTapGesture {
+                        vm.showNextEvent(raceLocation: event)
+                    }
+            }
+        })
+    }
+    
+    private var eventPreviewStack: some View {
+        ZStack{
+            ForEach(vm.allEvents) { event in
+                if vm.eventLocation == event {
+                    EventPreviewView(event: event)
+                        .shadow(color: Color.black.opacity(0.3), radius: 20)
+                        .padding()
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                }
+                
+            }
+        }
     }
 }
