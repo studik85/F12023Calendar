@@ -17,14 +17,32 @@ struct EventDetailView: View {
             VStack{
                 imageSection
                     .shadow(color: Color.black.opacity(0.3) , radius: 20, x: 0, y: 10)
-                
                 VStack(alignment: .leading, spacing: 16) {
-                    tittleSection
+                    raceSection
                     Divider()
-                    detailSection
+                    firstPracticeSection
                     Divider()
+                    if event.thirdPractice?.date != nil {
+                        secondPracticeSection
+                        Divider()
+                        thirdPracticeSection
+                        Divider()
+                        qualificationSection
+                        Divider()
+                    } else {
+                        qualificationSection
+                        Divider()
+                        secondPracticeSection
+                        Divider()
+                        sprintSection
+                        Divider()
+                    }
+                    
+                    
                     mapLayer
+                    
                 }
+                
                 .frame(maxWidth: .infinity , alignment: .leading)
                 .padding()
             }
@@ -43,11 +61,12 @@ extension EventDetailView {
         Image(event.circuit.circuitName)
             .resizable()
             .scaledToFit()
-            .frame(width: UIScreen.main.bounds.width)
-            .clipped()
+            .padding(.top, 25)
+        //            .frame(width: UIScreen.main.bounds.width)
+        //            .clipped()
     }
     
-    private var tittleSection: some View {
+    private var raceSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(event.raceName)
                 .font(.largeTitle)
@@ -56,18 +75,61 @@ extension EventDetailView {
                 .font(.title2)
             Text(event.time)
                 .font(.title2)
-        }
-    }
-    
-    private var detailSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(event.firstPractice.date)
-            Text(event.firstPractice.time)
             if let url = URL(string: event.url) {
                 Link("See More on Wiki", destination: url)
                     .font(.headline)
                     .tint(.blue)
             }
+        }
+    }
+    
+    
+    private var firstPracticeSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("First Practice Session")
+            Text(event.firstPractice.date)
+            Text(event.firstPractice.time)
+            
+            
+        }
+    }
+    
+    private var secondPracticeSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Second Practice Session")
+            Text(event.secondPractice.date)
+            Text(event.secondPractice.time)
+            
+            
+        }
+    }
+    
+    private var thirdPracticeSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Third Practice Session")
+            Text(event.thirdPractice?.date ?? "Qual")
+            Text(event.thirdPractice?.time ?? "Qual")
+            
+            
+        }
+    }
+    
+    private var qualificationSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Qualifying")
+            Text(event.qualifying.date)
+            Text(event.qualifying.time)
+            
+            
+        }
+    }
+    
+    private var sprintSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Sprint")
+            Text(event.sprint?.date ?? "sp")
+            Text(event.sprint?.time ?? "sp")
+            
             
         }
     }
@@ -76,15 +138,15 @@ extension EventDetailView {
         Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(
             latitude: Double(event.circuit.location.lat) ?? 0.0000,
             longitude: Double(event.circuit.location.long) ?? 0.0000),
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))),
+                                                           span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))),
             annotationItems: [event]) { event in
             MapAnnotation(coordinate:
                             CLLocationCoordinate2D(
-                            latitude: Double(event.circuit.location.lat) ?? 0.0000,
-                            longitude: Double(event.circuit.location.long) ?? 0.0000)) {
-                EventMapAnnotationView()
-                    .shadow(radius: 10)
-            }
+                                latitude: Double(event.circuit.location.lat) ?? 0.0000,
+                                longitude: Double(event.circuit.location.long) ?? 0.0000)) {
+                                    EventMapAnnotationView()
+                                        .shadow(radius: 10)
+                                }
             
         }
             .allowsHitTesting(false)
