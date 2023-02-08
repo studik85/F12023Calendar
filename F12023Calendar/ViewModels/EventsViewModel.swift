@@ -26,6 +26,8 @@ class EventViewModel: ObservableObject {
     // Показать список гонок
     @Published var showEventList: Bool = false
     
+    @Published var sheetEvents: Race? = nil
+    
     init() {
         getScheduleOfRaces()
         

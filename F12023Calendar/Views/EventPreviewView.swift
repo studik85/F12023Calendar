@@ -75,7 +75,7 @@ extension EventPreviewView {
     
     private var moreAboutButton: some View {
         Button {
-            
+            vm.sheetEvents = event
         } label: {
             Text("More About")
                 .font(.headline)

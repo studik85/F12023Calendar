@@ -8,11 +8,9 @@
 import SwiftUI
 import MapKit
 
-
 struct EventsView: View {
     
     @EnvironmentObject private var vm: EventViewModel
-    //    @State var mapRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 26.0325, longitude: 50.5106), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     
     var body: some View {
         ZStack{
@@ -25,9 +23,11 @@ struct EventsView: View {
                 eventPreviewStack
             }
         }
+        .sheet(item: $vm.sheetEvents, onDismiss: nil) { event in
+            EventDetailView(event: event)
+        }
     }
 }
-
 
 struct EventsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -35,7 +35,6 @@ struct EventsView_Previews: PreviewProvider {
             .environmentObject(EventViewModel())
     }
 }
-
 
 extension EventsView {
     
@@ -74,8 +73,10 @@ extension EventsView {
         Map(coordinateRegion: $vm.mapRegion,
             annotationItems: vm.allEvents,
             annotationContent: { event in
-            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(event.circuit.location.lat) ?? 0.0000,
-                                                             longitude: Double(event.circuit.location.long) ?? 0.0000)) {
+            MapAnnotation(
+                coordinate:
+                    CLLocationCoordinate2D(latitude: Double(event.circuit.location.lat) ?? 0.0000,
+                                           longitude: Double(event.circuit.location.long) ?? 0.0000)) {
                 EventMapAnnotationView()
                     .scaleEffect(vm.eventLocation == event ? 1 : 0.7)
                     .shadow(radius: 10)
@@ -94,8 +95,7 @@ extension EventsView {
                         .shadow(color: Color.black.opacity(0.3), radius: 20)
                         .padding()
                         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                }
-                
+                }                
             }
         }
     }
