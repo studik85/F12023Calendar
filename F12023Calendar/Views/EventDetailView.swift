@@ -71,9 +71,7 @@ extension EventDetailView {
             Text(event.raceName)
                 .font(.largeTitle)
                 .fontWeight(.semibold)
-            Text(event.date)
-                .font(.title2)
-            Text(event.time)
+            Text(vm.convertUTCDateToLocalDate(date: event.date, time: event.time))
                 .font(.title2)
             if let url = URL(string: event.url) {
                 Link("See More on Wiki", destination: url)
@@ -87,8 +85,7 @@ extension EventDetailView {
     private var firstPracticeSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("First Practice Session")
-            Text(event.firstPractice.date)
-            Text(event.firstPractice.time)
+            Text(vm.convertUTCDateToLocalDate(date: event.firstPractice.date, time: event.firstPractice.time))
             
             
         }
@@ -97,8 +94,8 @@ extension EventDetailView {
     private var secondPracticeSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Second Practice Session")
-            Text(event.secondPractice.date)
-            Text(event.secondPractice.time)
+            Text(vm.convertUTCDateToLocalDate(date: event.secondPractice.date, time: event.secondPractice.time))
+            
             
             
         }
@@ -107,8 +104,8 @@ extension EventDetailView {
     private var thirdPracticeSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Third Practice Session")
-            Text(event.thirdPractice?.date ?? "Qual")
-            Text(event.thirdPractice?.time ?? "Qual")
+            Text(vm.convertUTCDateToLocalDate(date: event.thirdPractice!.date, time: event.thirdPractice!.time))
+
             
             
         }
@@ -117,8 +114,8 @@ extension EventDetailView {
     private var qualificationSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Qualifying")
-            Text(event.qualifying.date)
-            Text(event.qualifying.time)
+            Text(vm.convertUTCDateToLocalDate(date: event.qualifying.date, time: event.qualifying.time))
+  
             
             
         }
