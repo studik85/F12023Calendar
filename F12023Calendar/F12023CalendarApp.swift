@@ -11,11 +11,13 @@ import SwiftUI
 struct F12023CalendarApp: App {
     
     @StateObject private var vm = EventViewModel()
+    @StateObject var lnManager = LocalNotificationManager()
     
     var body: some Scene {
         WindowGroup {
             EventsView()
                 .environmentObject(vm)
+                .environmentObject(lnManager)
         }
     }
 }

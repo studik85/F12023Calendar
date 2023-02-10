@@ -12,7 +12,7 @@ struct EventMapAnnotationView: View {
     var body: some View {
   
         VStack(spacing: 0){
-            Image(systemName: "map.circle.fill")
+            Image(systemName: "flag.checkered.circle.fill")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 30)

@@ -17,7 +17,8 @@ struct EventDetailView: View {
             VStack{
                 imageSection
                     .shadow(color: Color.black.opacity(0.3) , radius: 20, x: 0, y: 10)
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 5) {
+                    
                     raceSection
                     Divider()
                     firstPracticeSection
@@ -37,10 +38,12 @@ struct EventDetailView: View {
                         sprintSection
                         Divider()
                     }
-                    
-                    
+                    if let url = URL(string: event.circuit.url) {
+                        Link("See More on Wiki", destination: url)
+                            .font(.headline)
+                            .tint(.blue)
+                    }
                     mapLayer
-                    
                 }
                 
                 .frame(maxWidth: .infinity , alignment: .leading)
@@ -67,18 +70,15 @@ extension EventDetailView {
     }
     
     private var raceSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(event.raceName)
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-            Text(vm.convertUTCDateToLocalDate(date: event.date, time: event.time))
-                .font(.title2)
-            if let url = URL(string: event.url) {
-                Link("See More on Wiki", destination: url)
+        
+            VStack(alignment: .leading, spacing: 8) {
+                Text(event.raceName)
                     .font(.headline)
-                    .tint(.blue)
+                    .fontWeight(.semibold)
+                Text("Race")
+                Text(vm.convertUTCDateToLocalDate(date: event.date, time: event.time))
             }
-        }
+        
     }
     
     
@@ -104,10 +104,7 @@ extension EventDetailView {
     private var thirdPracticeSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Third Practice Session")
-            Text(vm.convertUTCDateToLocalDate(date: event.thirdPractice!.date, time: event.thirdPractice!.time))
-
-            
-            
+            Text(vm.convertUTCDateToLocalDate(date: event.thirdPractice?.date ?? "no date", time: event.thirdPractice?.time ?? "no time"))
         }
     }
     
@@ -124,8 +121,8 @@ extension EventDetailView {
     private var sprintSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Sprint")
-            Text(event.sprint?.date ?? "sp")
-            Text(event.sprint?.time ?? "sp")
+            Text(vm.convertUTCDateToLocalDate(date: event.sprint?.date ?? "no date", time: event.sprint?.time ?? "no time"))
+
             
             
         }
@@ -165,5 +162,17 @@ extension EventDetailView {
                 .padding()
         }
         
+    }
+    
+    private var notificationButton: some View {
+        Button {
+           
+        } label: {
+            HStack {
+                Text("Turn")
+                Image(systemName: "bell.and.waves.left.and.right")
+            }
+        }
+        .buttonStyle(.borderedProminent)
     }
 }

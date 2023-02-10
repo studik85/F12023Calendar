@@ -11,28 +11,45 @@ import MapKit
 struct EventsView: View {
     
     @EnvironmentObject private var vm: EventViewModel
+    @EnvironmentObject var lnManager: LocalNotificationManager
+    @Environment(\.scenePhase) var scenePhase
+    let maxWidthForIpad: CGFloat = 700
+    
     
     var body: some View {
-        ZStack{
-           mapLayer
-            .ignoresSafeArea()
-            VStack(spacing: 0){
-                header
-                    .padding()
-                Spacer()
-                eventPreviewStack
+            ZStack{
+                mapLayer
+                    .ignoresSafeArea()
+                VStack(spacing: 0){
+                    header
+                        .padding()
+                        .frame(maxWidth: maxWidthForIpad)
+                    Spacer()
+                    eventPreviewStack
+                }
+            }
+            .sheet(item: $vm.sheetEvents, onDismiss: nil) { event in
+                EventDetailView(event: event)
+            }
+            .task {
+                try? await lnManager.requestAuthorization()
+            }
+            .onChange(of: scenePhase) { newValue in
+                if newValue == .active {
+                    Task {
+                       await lnManager.getCurrentSettings()
+                    }
+                    
+                }
             }
         }
-        .sheet(item: $vm.sheetEvents, onDismiss: nil) { event in
-            EventDetailView(event: event)
-        }
-    }
 }
 
 struct EventsView_Previews: PreviewProvider {
     static var previews: some View {
         EventsView()
             .environmentObject(EventViewModel())
+            .environmentObject(LocalNotificationManager())
     }
 }
 
@@ -94,6 +111,8 @@ extension EventsView {
                     EventPreviewView(event: event)
                         .shadow(color: Color.black.opacity(0.3), radius: 20)
                         .padding()
+                        .frame(maxWidth: maxWidthForIpad)
+                        .frame(maxWidth: .infinity)
                         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 }                
             }

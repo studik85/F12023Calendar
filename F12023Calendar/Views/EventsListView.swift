@@ -45,15 +45,17 @@ extension EventsListView {
             Image(event.circuit.location.country)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 45, height: 45)
-                .cornerRadius(10)
+                .frame(width: 60, height: 35)
+                .cornerRadius(5)
             VStack (alignment: .leading) {
                 Text("ROUND \(event.round)")
-                    .font(.headline)
-                Text(event.date)
-                    .font(.subheadline)
-                Text(event.raceName.uppercased())
-                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    Text(event.raceName.uppercased())
+                        .font(.headline)
+    //                Text(event.date)
+//                        .font(.subheadline)
+//                    .fontWeight(.semibold)
+            
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)

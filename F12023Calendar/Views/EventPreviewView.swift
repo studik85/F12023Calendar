@@ -10,6 +10,7 @@ import SwiftUI
 struct EventPreviewView: View {
     
     @EnvironmentObject var vm: EventViewModel
+    @EnvironmentObject var lnManager: LocalNotificationManager
     
     let event: Race
     
@@ -22,10 +23,9 @@ struct EventPreviewView: View {
                 
             }
             VStack(spacing: 7){
-                
+                reminderButton
                 moreAboutButton
                 nextButton
-                prevButton
                 
                 
             }
@@ -95,14 +95,25 @@ extension EventPreviewView {
         .buttonStyle(.bordered)
     }
     
-    private var prevButton: some View {
+    private var reminderButton: some View {
         Button {
-            vm.prevButtonPressed()
+            if lnManager.isGranted {
+                Task {
+                    let localNotification = LocalNotification(identifier: UUID().uuidString, title: event.raceName, body: event.circuit.circuitName, timeInterval: 5, repeats: false)
+                    await lnManager.schedule(localNotification: localNotification)
+                }
+            } else {
+                lnManager.openSettings()
+            }
+            
         } label: {
-            Text("Previous Race")
-                .font(.headline)
-                .frame(width: 125, height: 30)
+           
+            Text(lnManager.isGranted ? "Add \(Image(systemName: "bell.and.waves.left.and.right"))" : "Enable \(Image(systemName: "bell.and.waves.left.and.right"))")
+                    .font(.headline)
+                    .frame(width: 125, height: 30)
         }
-        .buttonStyle(.bordered)
+        .buttonStyle(.borderedProminent)
+        
     }
+    
 }

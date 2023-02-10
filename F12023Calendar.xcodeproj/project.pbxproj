@@ -18,6 +18,8 @@
 		ACCAD2A52993A7C200345399 /* EventPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A42993A7C200345399 /* EventPreviewView.swift */; };
 		ACCAD2A729940E0C00345399 /* EventMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A629940E0C00345399 /* EventMapAnnotationView.swift */; };
 		ACCAD2A9299416D500345399 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCAD2A8299416D500345399 /* EventDetailView.swift */; };
+		ACD4C3182996A9000068A56D /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4C3172996A9000068A56D /* LocalNotificationManager.swift */; };
+		ACD4C31A2996BB030068A56D /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4C3192996BB030068A56D /* LocalNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,9 @@
 		ACCAD2A42993A7C200345399 /* EventPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreviewView.swift; sourceTree = "<group>"; };
 		ACCAD2A629940E0C00345399 /* EventMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapAnnotationView.swift; sourceTree = "<group>"; };
 		ACCAD2A8299416D500345399 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		ACD4C3172996A9000068A56D /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		ACD4C3192996BB030068A56D /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
+		ACDB639C299521A800C5E280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +70,8 @@
 		AC237DD6298FFBB900334B55 /* F12023Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				ACD4C3162996A8D60068A56D /* Services */,
+				ACDB639C299521A800C5E280 /* Info.plist */,
 				AC237DE5298FFE0800334B55 /* Model */,
 				AC237DE7298FFE1C00334B55 /* ViewModels */,
 				AC237DE6298FFE1200334B55 /* Views */,
@@ -87,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				AC237DE8298FFED700334B55 /* ScheduleOfRaces.swift */,
+				ACD4C3192996BB030068A56D /* LocalNotification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -110,6 +118,14 @@
 				ACB6BE59299262D900DB6655 /* EventsViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ACD4C3162996A8D60068A56D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ACD4C3172996A9000068A56D /* LocalNotificationManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,12 +200,14 @@
 			files = (
 				ACB6BE5A299262D900DB6655 /* EventsViewModel.swift in Sources */,
 				ACCAD2A329938F8100345399 /* EventsListView.swift in Sources */,
+				ACD4C3182996A9000068A56D /* LocalNotificationManager.swift in Sources */,
 				AC237DEE2990030400334B55 /* EventsView.swift in Sources */,
 				AC237DD8298FFBB900334B55 /* F12023CalendarApp.swift in Sources */,
 				AC237DEC299001B800334B55 /* EventsViewModelWithCombine.swift in Sources */,
 				ACCAD2A9299416D500345399 /* EventDetailView.swift in Sources */,
 				AC237DE9298FFED700334B55 /* ScheduleOfRaces.swift in Sources */,
 				ACCAD2A729940E0C00345399 /* EventMapAnnotationView.swift in Sources */,
+				ACD4C31A2996BB030068A56D /* LocalNotification.swift in Sources */,
 				ACCAD2A52993A7C200345399 /* EventPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,11 +340,13 @@
 				DEVELOPMENT_TEAM = 6SU4X4KX89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = F12023Calendar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Formula Remider";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,11 +371,13 @@
 				DEVELOPMENT_TEAM = 6SU4X4KX89;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = F12023Calendar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Formula Remider";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

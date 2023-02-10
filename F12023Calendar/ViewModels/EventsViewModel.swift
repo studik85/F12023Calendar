@@ -133,7 +133,7 @@ class EventViewModel: ObservableObject {
         let newDate = formatter.date(from: stringDate)
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let localDateStr = formatter.string(from: newDate!)
+        let localDateStr = formatter.string(from: newDate ?? Date())
         return localDateStr
     }
     
