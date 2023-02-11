@@ -98,8 +98,10 @@ extension EventPreviewView {
     private var reminderButton: some View {
         Button {
             if lnManager.isGranted {
-                Task {
-                    let localNotification = LocalNotification(identifier: UUID().uuidString, title: event.raceName, body: event.circuit.circuitName, timeInterval: 5, repeats: false)
+                 Task{
+                    guard let date = vm.convertUTCDateToLocalDate(date: event.date, time: event.time) else {return}
+                    let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+                    let localNotification = LocalNotification(identifier: UUID().uuidString, title: event.raceName, body: event.circuit.circuitName, dateComponents: dateComponents, repeats: false)
                     await lnManager.schedule(localNotification: localNotification)
                 }
             } else {

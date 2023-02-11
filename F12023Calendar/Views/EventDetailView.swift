@@ -10,14 +10,17 @@ import MapKit
 
 struct EventDetailView: View {
     @EnvironmentObject private var vm: EventViewModel
+    @EnvironmentObject var lnManager: LocalNotificationManager
     let event: Race
     
     var body: some View {
         ScrollView{
             VStack{
                 imageSection
+                
                     .shadow(color: Color.black.opacity(0.3) , radius: 20, x: 0, y: 10)
                 VStack(alignment: .leading, spacing: 5) {
+                  
                     
                     raceSection
                     Divider()
@@ -43,6 +46,7 @@ struct EventDetailView: View {
                             .font(.headline)
                             .tint(.blue)
                     }
+                    notificationSection
                     mapLayer
                 }
                 
@@ -77,6 +81,34 @@ extension EventDetailView {
                     .fontWeight(.semibold)
                 Text("Race")
                 Text(vm.convertUTCDateToLocalDate(date: event.date, time: event.time))
+            }
+        
+    }
+    
+    private var notificationSection: some View {
+        
+            VStack(alignment: .leading, spacing: 8) {
+                List{
+                    ForEach(lnManager.pendingRequests, id: \.identifier) { request in
+                        
+                        VStack(alignment: .leading) {
+                            Text(request.content.title)
+                            HStack {
+                                Text(request.content.body)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                        }
+                        .swipeActions {
+                            Button("Delete", role: .destructive) {
+                                lnManager.removeRequest(withIdentifier: request.identifier)
+                            }
+                        }
+                        
+                    }
+                }
+                .listStyle(.plain)
             }
         
     }

@@ -38,6 +38,7 @@ struct EventsView: View {
                 if newValue == .active {
                     Task {
                        await lnManager.getCurrentSettings()
+                        await lnManager.getPendingRequests()
                     }
                     
                 }
