@@ -10,7 +10,7 @@ import SwiftUI
 struct EventMapAnnotationView: View {
     let accentColor = Color("AccentColor")
     var body: some View {
-  
+        
         VStack(spacing: 0){
             Image(systemName: "flag.checkered.circle.fill")
                 .resizable()

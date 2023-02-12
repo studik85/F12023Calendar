@@ -13,38 +13,38 @@ struct EventsView: View {
     @EnvironmentObject private var vm: EventViewModel
     @EnvironmentObject var lnManager: LocalNotificationManager
     @Environment(\.scenePhase) var scenePhase
+    
     let maxWidthForIpad: CGFloat = 700
     
-    
     var body: some View {
-            ZStack{
-                mapLayer
-                    .ignoresSafeArea()
-                VStack(spacing: 0){
-                    header
-                        .padding()
-                        .frame(maxWidth: maxWidthForIpad)
-                    Spacer()
-                    eventPreviewStack
-                }
+        ZStack{
+            mapLayer
+                .ignoresSafeArea()
+            VStack(spacing: 0){
+                header
+                    .padding()
+                    .frame(maxWidth: maxWidthForIpad)
+                Spacer()
+                eventPreviewStack
             }
-            .sheet(item: $vm.sheetEvents, onDismiss: nil) { event in
-                EventDetailView(event: event)
-            }
-            .task {
-                try? await lnManager.requestAuthorization()
-            }
-            .onChange(of: scenePhase) { newValue in
-                if newValue == .active {
-                    Task {
-                       await lnManager.getCurrentSettings()
-                        await lnManager.getPendingRequests()
-                    }
-                    
+        }            
+        .sheet(item: $vm.sheetEvents, onDismiss: nil) { event in
+            EventDetailView(event: event)
+        }
+        .task {
+            try? await lnManager.requestAuthorization()
+        }
+        .onChange(of: scenePhase) { newValue in
+            if newValue == .active {
+                Task {
+                    await lnManager.getCurrentSettings()
+                    await lnManager.getPendingRequests()
                 }
             }
         }
+    }
 }
+
 
 struct EventsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -95,13 +95,13 @@ extension EventsView {
                 coordinate:
                     CLLocationCoordinate2D(latitude: Double(event.circuit.location.lat) ?? 0.0000,
                                            longitude: Double(event.circuit.location.long) ?? 0.0000)) {
-                EventMapAnnotationView()
-                    .scaleEffect(vm.eventLocation == event ? 1 : 0.7)
-                    .shadow(radius: 10)
-                    .onTapGesture {
-                        vm.showNextEvent(raceLocation: event)
-                    }
-            }
+                                               EventMapAnnotationView()
+                                                   .scaleEffect(vm.eventLocation == event ? 1 : 0.7)
+                                                   .shadow(radius: 10)
+                                                   .onTapGesture {
+                                                       vm.showNextEvent(raceLocation: event)
+                                                   }
+                                           }
         })
     }
     

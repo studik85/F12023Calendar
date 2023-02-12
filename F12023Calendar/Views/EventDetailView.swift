@@ -10,18 +10,15 @@ import MapKit
 
 struct EventDetailView: View {
     @EnvironmentObject private var vm: EventViewModel
-    @EnvironmentObject var lnManager: LocalNotificationManager
+    @EnvironmentObject private var lnManager: LocalNotificationManager
     let event: Race
     
     var body: some View {
         ScrollView{
-            VStack{
+            VStack(alignment: .leading, spacing: 5){
                 imageSection
-                
                     .shadow(color: Color.black.opacity(0.3) , radius: 20, x: 0, y: 10)
                 VStack(alignment: .leading, spacing: 5) {
-                  
-                    
                     raceSection
                     Divider()
                     firstPracticeSection
@@ -42,22 +39,20 @@ struct EventDetailView: View {
                         Divider()
                     }
                     if let url = URL(string: event.circuit.url) {
-                        Link("See More on Wiki", destination: url)
+                        Link("Wiki", destination: url)
                             .font(.headline)
                             .tint(.blue)
                     }
-                    notificationSection
                     mapLayer
                 }
-                
-                .frame(maxWidth: .infinity , alignment: .leading)
-                .padding()
             }
+            .frame(maxWidth: .infinity , alignment: .leading)
+            .padding()
         }
         
         .ignoresSafeArea()
         .background(.ultraThinMaterial)
-        .overlay(backButton, alignment: .topLeading)
+        .overlay(backButton, alignment: .topTrailing)
         
     }
     
@@ -69,94 +64,100 @@ extension EventDetailView {
             .resizable()
             .scaledToFit()
             .padding(.top, 25)
-        //            .frame(width: UIScreen.main.bounds.width)
-        //            .clipped()
+        //                    .frame(width: UIScreen.main.bounds.width)
+        //                    .clipped()
     }
     
     private var raceSection: some View {
         
-            VStack(alignment: .leading, spacing: 8) {
-                Text(event.raceName)
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                Text("Race")
-                Text(vm.convertUTCDateToLocalDate(date: event.date, time: event.time))
-            }
-        
+        VStack(alignment: .leading, spacing: 5) {
+            Text(event.raceName)
+                .font(.title)
+                .fontWeight(.semibold)
+            Text("Race")
+                .font(.title2)
+                .fontWeight(.semibold)
+            Text(vm.convertUTCDateToLocalDate(date: event.date, time: event.time))
+                .font(.headline)
+                .fontWeight(.semibold)
+        }
     }
     
     private var notificationSection: some View {
-        
-            VStack(alignment: .leading, spacing: 8) {
-                List{
-                    ForEach(lnManager.pendingRequests, id: \.identifier) { request in
-                        
-                        VStack(alignment: .leading) {
-                            Text(request.content.title)
-                            HStack {
-                                Text(request.content.body)
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                        }
-                        .swipeActions {
-                            Button("Delete", role: .destructive) {
-                                lnManager.removeRequest(withIdentifier: request.identifier)
-                            }
+        VStack {
+            List{
+                ForEach(lnManager.pendingRequests, id: \.identifier) { request in
+                    
+                    VStack(alignment: .leading) {
+                        Text(request.content.title)
+                        HStack {
+                            Text(request.content.body)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
                         
                     }
+                    .listRowBackground(Color.clear)
+                    .swipeActions {
+                        Button("Delete", role: .destructive) {
+                            lnManager.removeRequest(withIdentifier: request.identifier)
+                        }
+                    }
+                    
                 }
-                .listStyle(.plain)
             }
-        
+            .listStyle(.plain)
+        }
     }
     
-    
     private var firstPracticeSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("First Practice Session")
+        VStack(alignment: .leading, spacing: 5){
+            Text("First Practice")
+                .font(.title2)
+                .fontWeight(.semibold)
             Text(vm.convertUTCDateToLocalDate(date: event.firstPractice.date, time: event.firstPractice.time))
-            
-            
+                .font(.headline)
+                .fontWeight(.semibold)
         }
     }
     
     private var secondPracticeSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Second Practice Session")
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Second Practice")
+                .font(.title2)
+                .fontWeight(.semibold)
             Text(vm.convertUTCDateToLocalDate(date: event.secondPractice.date, time: event.secondPractice.time))
-            
-            
-            
+                .font(.headline)
+                .fontWeight(.semibold)
         }
     }
     
     private var thirdPracticeSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Third Practice Session")
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Third Practice")
+                .font(.title2)
+                .fontWeight(.semibold)
             Text(vm.convertUTCDateToLocalDate(date: event.thirdPractice?.date ?? "no date", time: event.thirdPractice?.time ?? "no time"))
+                .font(.headline)
+                .fontWeight(.semibold)
         }
     }
     
     private var qualificationSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 5) {
             Text("Qualifying")
+                .font(.title2)
+                .fontWeight(.semibold)
             Text(vm.convertUTCDateToLocalDate(date: event.qualifying.date, time: event.qualifying.time))
-  
-            
-            
+                .font(.headline)
+                .fontWeight(.semibold)
         }
     }
     
     private var sprintSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack (alignment: .leading, spacing: 5){
             Text("Sprint")
             Text(vm.convertUTCDateToLocalDate(date: event.sprint?.date ?? "no date", time: event.sprint?.time ?? "no time"))
-
-            
-            
         }
     }
     
@@ -196,15 +197,4 @@ extension EventDetailView {
         
     }
     
-    private var notificationButton: some View {
-        Button {
-           
-        } label: {
-            HStack {
-                Text("Turn")
-                Image(systemName: "bell.and.waves.left.and.right")
-            }
-        }
-        .buttonStyle(.borderedProminent)
-    }
 }

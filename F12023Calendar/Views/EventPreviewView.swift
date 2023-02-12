@@ -19,15 +19,11 @@ struct EventPreviewView: View {
             VStack(alignment: .leading, spacing: 8) {
                 imageSection
                 titleSection
-                
-                
             }
             VStack(spacing: 7){
                 reminderButton
                 moreAboutButton
                 nextButton
-                
-                
             }
         }
         .padding(20)
@@ -98,7 +94,7 @@ extension EventPreviewView {
     private var reminderButton: some View {
         Button {
             if lnManager.isGranted {
-                 Task{
+                Task{
                     guard let date = vm.convertUTCDateToLocalDate(date: event.date, time: event.time) else {return}
                     let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
                     let localNotification = LocalNotification(identifier: UUID().uuidString, title: event.raceName, body: event.circuit.circuitName, dateComponents: dateComponents, repeats: false)
@@ -109,13 +105,12 @@ extension EventPreviewView {
             }
             
         } label: {
-           
+            
             Text(lnManager.isGranted ? "Add \(Image(systemName: "bell.and.waves.left.and.right"))" : "Enable \(Image(systemName: "bell.and.waves.left.and.right"))")
-                    .font(.headline)
-                    .frame(width: 125, height: 30)
+                .font(.headline)
+                .frame(width: 125, height: 30)
         }
-        .buttonStyle(.borderedProminent)
-        
+        .buttonStyle(.borderedProminent)        
     }
     
 }

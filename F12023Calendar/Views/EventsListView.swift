@@ -21,9 +21,6 @@ struct EventsListView: View {
                 }
                 .padding(.vertical, 4)
                 .listRowBackground(Color.clear)
-                
-                
-                
             }
         }
         .listStyle(PlainListStyle())
@@ -50,13 +47,8 @@ extension EventsListView {
             VStack (alignment: .leading) {
                 Text("ROUND \(event.round)")
                     .fontWeight(.bold)
-                    Text(event.raceName.uppercased())
-                        .font(.headline)
-    //                Text(event.date)
-//                        .font(.subheadline)
-//                    .fontWeight(.semibold)
-            
-                
+                Text(event.raceName.uppercased())
+                    .font(.headline)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

@@ -39,7 +39,6 @@ struct Race: Codable, Identifiable, Equatable {
     
     
     let id = UUID().uuidString
-    var isNotificationEnable: Bool = false
     let season, round: String
     let url: String
     let raceName: String

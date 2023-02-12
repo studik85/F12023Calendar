@@ -25,7 +25,6 @@ class EventViewModel: ObservableObject {
     
     // Показать список гонок
     @Published var showEventList: Bool = false
-    
     @Published var sheetEvents: Race? = nil
     
     init() {
@@ -66,8 +65,6 @@ class EventViewModel: ObservableObject {
                 return
             }
             complitionHandler(data)
-            
-            
             
         }
         .resume()
@@ -132,13 +129,12 @@ class EventViewModel: ObservableObject {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let newDate = formatter.date(from: stringDate)
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let localDateStr = formatter.string(from: newDate ?? Date())
         return localDateStr
     }
     
     func convertUTCDateToLocalDate(date: String, time: String) -> Date? {
-        
         let stringDate: String = date + "T" + time
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
